@@ -10,7 +10,7 @@ const Board = () => {
       <BoardNavbar />
       <Navbar />
       <Box
-        width="100%"
+        width="100vw"
         padding="15px"
         d="flex"
         gap="6"
