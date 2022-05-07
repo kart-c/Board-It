@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -11,8 +11,14 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 function NoteModal({ isOpen, onClose, modalNote }) {
-  const [editNote, setEditNote] = useState(modalNote);
+  console.log(modalNote);
+  const [editNote, setEditNote] = useState({ note: '' });
+  console.log(editNote);
   const initialRef = useRef();
+  useEffect(() => {
+    console.log('in effect');
+    setEditNote(modalNote);
+  }, [modalNote]);
   return (
     <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
