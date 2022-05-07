@@ -12,8 +12,8 @@ const addNewBoardService = async (user, boardTitle) => {
       editors: [user.id],
       lists: [],
     };
-
-    await addDoc(boardsCollectionRef, boardObj);
+    const response = await addDoc(boardsCollectionRef, boardObj);
+    return response.id;
   } catch (error) {
     console.error(error);
   }

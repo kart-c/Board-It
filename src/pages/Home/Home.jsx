@@ -11,7 +11,6 @@ const Home = () => {
     getBoardsService(setBoards);
   }, []);
 
-
   return (
     <Box bg="gray.300" h="100vh">
       <Navbar onOpen={onOpen} />
