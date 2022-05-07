@@ -1,12 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Board, Login } from './pages';
+import { Home, Login, Board } from './pages';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/board" element={<Board />} />
       </Routes>
     </>
