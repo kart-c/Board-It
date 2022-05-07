@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Input, Text, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  IconButton,
+  Input,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { NoteModal } from '../NoteModal/NoteModal';
 function List() {
@@ -73,14 +80,13 @@ function List() {
           >
             {note.note}
           </Text>
-          <Button
+          <IconButton
+            icon={<FiEdit />}
             onClick={() => {
               setModalNote(note);
               onOpen();
             }}
-          >
-            <FiEdit />
-          </Button>
+          />
         </Box>
       ))}
       <NoteModal isOpen={isOpen} onClose={onClose} modalNote={modalNote} />
