@@ -9,7 +9,14 @@ const Board = () => {
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
       <BoardNavbar />
       <Navbar />
-      <Box padding="15px" d="flex" gap="6" maxH="calc(100vh - 200px)">
+      <Box
+        width="100%"
+        padding="15px"
+        d="flex"
+        gap="6"
+        maxH="calc(100vh - 200px)"
+        overflowX="auto"
+      >
         <List />
         <List />
         <List />
