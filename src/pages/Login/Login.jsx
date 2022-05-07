@@ -1,9 +1,12 @@
 import React from 'react';
 import { Box, Button, Heading } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
-import { googleSignInService, signOutService } from "../../services"
+import { googleSignInService } from '../../services';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<Box
@@ -18,7 +21,7 @@ const Login = () => {
 					BoardIT
 				</Heading>
 				<Button
-				onClick={() => googleSignInService()}
+					onClick={() => googleSignInService(navigate)}
 					colorScheme="twitter"
 					size="lg"
 					leftIcon={
@@ -29,7 +32,6 @@ const Login = () => {
 				>
 					Sign in with Google
 				</Button>
-				<Button onClick={() => signOutService()} > Test Sign out </Button>
 			</Box>
 		</>
 	);
