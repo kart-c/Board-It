@@ -19,6 +19,12 @@ const NewBoardModal = ({ isOpen, onClose, boards }) => {
   const [boardTitleInput, setBoardTitleInput] = useState("");
   const { currentUser } = useAuth();
 
+  const addNewBoardHandler = () => {
+    addNewBoardService(currentUser, boardTitleInput, boards);
+    setBoardTitleInput("");
+    onClose();
+  };
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -38,14 +44,7 @@ const NewBoardModal = ({ isOpen, onClose, boards }) => {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme="twitter"
-              mr="3"
-              onClick={() => {
-                addNewBoardService(currentUser, boardTitleInput, boards);
-                onClose();
-              }}
-            >
+            <Button colorScheme="twitter" mr="3" onClick={addNewBoardHandler}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
