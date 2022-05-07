@@ -71,7 +71,7 @@ function List() {
       />
 
       {notes.map(note => (
-        <Box mb="3" d="flex" alignItems="center" bg="gray.200" p="2">
+        <Box mb="3" d="flex" alignItems="center" bg="gray.200" p="2" gap="2">
           <Text
             overflowY="auto"
             w="80%"
