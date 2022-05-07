@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/auth-context';
 import { NewBoardModal } from '../../components/NewBoardModal/NewBoardModal';
+import { Navbar } from '../../components';
 
 const Home = () => {
 	const { currentUser } = useAuth();
@@ -13,27 +14,8 @@ const Home = () => {
 
 	return (
 		<Box bg="gray.300" h="100vh">
-			<NewBoardModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
-			<Box
-				p="4"
-				d="flex"
-				justifyContent="space-between"
-				bg="whiteAlpha.900"
-				boxShadow="md"
-				alignItems="center"
-				h="80px"
-			>
-				<Heading as="h1" size="lg">
-					BoardIt
-				</Heading>
-
-				<Button onClick={onOpen} colorScheme="twitter">
-					Add new Board
-				</Button>
-				<Button borderRadius="full" h="12" w="12" size="md">
-					{currentUser && creds}
-				</Button>
-			</Box>
+			<NewBoardModal isOpen={isOpen} onClose={onClose} />
+			<Navbar creds={creds} onOpen={onOpen} currentUser={currentUser} />
 			<Box
 				maxW="1400px"
 				mx={{
