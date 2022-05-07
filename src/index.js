@@ -1,17 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { ChakraProvider } from '@chakra-ui/react';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ChakraProvider } from "@chakra-ui/react";
+import "./index.css";
+import App from "./App";
+import { AuthContextProvider } from "./contexts";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
-		<ChakraProvider>
-			<App />
-		</ChakraProvider>
-	</React.StrictMode>
+  <React.StrictMode>
+    <ChakraProvider>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </ChakraProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

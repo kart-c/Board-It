@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Heading } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
+import { googleSignInService, signOutService } from "../../services"
 
 const Login = () => {
 	return (
@@ -17,6 +18,7 @@ const Login = () => {
 					BoardIT
 				</Heading>
 				<Button
+				onClick={() => googleSignInService()}
 					colorScheme="twitter"
 					size="lg"
 					leftIcon={
@@ -27,6 +29,7 @@ const Login = () => {
 				>
 					Sign in with Google
 				</Button>
+				<Button onClick={() => signOutService()} > Test Sign out </Button>
 			</Box>
 		</>
 	);
