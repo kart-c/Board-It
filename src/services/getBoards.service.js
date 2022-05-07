@@ -5,6 +5,7 @@ const getBoardsService = async (setBoards) => {
   try {
     const boardsCollectionRef = collection(db, "boards");
     await getDocs(boardsCollectionRef);
+
     onSnapshot(boardsCollectionRef, (response) => {
       const demoBoards = response.docs.map((doc) => ({
         ...doc.data(),
