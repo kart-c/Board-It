@@ -20,7 +20,9 @@ function NoteModal({ isOpen, onClose, modalNote }) {
     <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>
+          {editNote.note === '' ? 'Add New Note' : 'Edit Note'}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Textarea
@@ -36,9 +38,9 @@ function NoteModal({ isOpen, onClose, modalNote }) {
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
+            Save
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
+          <Button variant="ghost">Close</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

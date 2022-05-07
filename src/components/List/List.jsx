@@ -84,7 +84,17 @@ function List() {
         </Box>
       ))}
       <NoteModal isOpen={isOpen} onClose={onClose} modalNote={modalNote} />
-      <Button d="block" textAlign="left" bg="orange.100" mt="5" px="4">
+      <Button
+        d="block"
+        textAlign="left"
+        bg="orange.100"
+        mt="5"
+        px="4"
+        onClick={() => {
+          onOpen();
+          setModalNote({ note: '' });
+        }}
+      >
         Add a note
       </Button>
     </Box>
