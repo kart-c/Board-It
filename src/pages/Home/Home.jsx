@@ -1,21 +1,15 @@
 import React from 'react';
 import { Box, Button, Heading, Text, useDisclosure } from '@chakra-ui/react';
-import { useAuth } from '../../contexts/auth-context';
 import { NewBoardModal } from '../../components/NewBoardModal/NewBoardModal';
 import { Navbar } from '../../components';
 
 const Home = () => {
-	const { currentUser } = useAuth();
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const user = currentUser && currentUser.displayName.indexOf(' ');
-	const creds = `${currentUser && currentUser.displayName.slice(0, 1)}${
-		currentUser && currentUser.displayName.slice(user + 1, user + 2)
-	}`;
 
 	return (
 		<Box bg="gray.300" h="100vh">
 			<NewBoardModal isOpen={isOpen} onClose={onClose} />
-			<Navbar creds={creds} onOpen={onOpen} currentUser={currentUser} />
+			<Navbar onOpen={onOpen} />
 			<Box
 				maxW="1400px"
 				mx={{

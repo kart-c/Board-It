@@ -1,9 +1,16 @@
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Avatar, Box, Button, Heading } from '@chakra-ui/react';
 import React from 'react';
+import { useAuth } from '../../contexts/auth-context';
 
-const Navbar = ({ onOpen, currentUser, creds }) => {
+const Navbar = ({ onOpen }) => {
+	const { currentUser } = useAuth();
+
 	return (
 		<Box
+			position="fixed"
+			left="0"
+			right="0"
+			top="0"
 			p="4"
 			d="flex"
 			justifyContent="space-between"
@@ -16,12 +23,12 @@ const Navbar = ({ onOpen, currentUser, creds }) => {
 				BoardIt
 			</Heading>
 
-			<Button onClick={onOpen} colorScheme="twitter">
-				Add new Board
-			</Button>
-			<Button borderRadius="full" h="12" w="12" size="md">
-				{currentUser ? creds : ''}
-			</Button>
+			{onOpen ? (
+				<Button onClick={onOpen} colorScheme="twitter">
+					Add new Board
+				</Button>
+			) : null}
+			<Avatar name={currentUser ? currentUser.displayName : ''} />
 		</Box>
 	);
 };
