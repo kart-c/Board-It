@@ -1,16 +1,16 @@
-import React from 'react';
-import { NavigationType, useNavigate } from 'react-router-dom';
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import { useAuth } from '../../contexts/auth-context';
+import React from "react";
+import { NavigationType, useNavigate } from "react-router-dom";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { useAuth } from "../../contexts/auth-context";
 
 const Home = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  const user = currentUser && currentUser.displayName.indexOf(' ');
-  const creds = `${currentUser && currentUser.displayName.slice(0, 1)}${
-    currentUser && currentUser.displayName.slice(user + 1, user + 2)
-  }`;
+  // const user = currentUser && currentUser.displayName.indexOf(' ');
+  // const creds = `${currentUser && currentUser.displayName.slice(0, 1)}${
+  //   currentUser && currentUser.displayName.slice(user + 1, user + 2)
+  // }`;
 
   return (
     <Box bg="gray.300" h="100vh">
@@ -27,16 +27,17 @@ const Home = () => {
           BoardIt
         </Heading>
 
-        <Button onClick={() => navigate('/board')}>Add new Board</Button>
+        <Button onClick={() => navigate("/board")}>Add new Board</Button>
         <Button borderRadius="full" h="12" w="12" size="md">
-          {currentUser && creds}
+          {/* {currentUser && creds} */}
+          AP
         </Button>
       </Box>
       <Box
         maxW="1400px"
         mx={{
-          md: 'auto',
-          base: '12',
+          md: "auto",
+          base: "12",
         }}
         my="8"
         d="flex"
