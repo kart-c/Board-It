@@ -24,7 +24,7 @@ function NoteModal({ isOpen, onClose, modalNote }) {
             ref={initialRef}
             rows="10"
             resize="none"
-            value={modalNote.note}
+            value={editNote.note}
             onChange={e =>
               setEditNote(prev => ({ ...prev, note: e.target.value }))
             }
