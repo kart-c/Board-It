@@ -9,7 +9,7 @@ function Navbar() {
           name="Kola Tioluwani"
           src="https://bit.ly/tioluwani-kolawole"
         />
-        <Button>Share</Button>
+        <Button>Members</Button>
       </Box>
 
       <Input w="17rem" />
