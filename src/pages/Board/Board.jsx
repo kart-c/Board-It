@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleBoardService } from "../../services";
 import {
   Box,
   Button,
@@ -14,22 +13,23 @@ import {
   PopoverTrigger,
   useDisclosure,
 } from "@chakra-ui/react";
-import { List, Navbar, BoardNavbar } from "../../components";
 import { IoMdAdd } from "react-icons/io";
+import { useBoards } from "../../contexts";
+import { List, Navbar, BoardNavbar } from "../../components";
 
 const Board = () => {
   const { boardId } = useParams();
+  const { boards } = useBoards();
   const initialFocusRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [title, setTitle] = useState("");
-  const [list, setList] = useState([{ list: "todo" }, { list: "completed" }]);
+  const [list, setList] = useState([]);
   const [board, setBoard] = useState({});
 
   useEffect(() => {
-    getSingleBoardService(boardId, setBoard);
+    const singleBoard = boards.find((board) => board.id === boardId);
+    setBoard(singleBoard);
   }, []);
-
-  console.log(board, boardId);
 
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
@@ -43,9 +43,9 @@ const Board = () => {
         maxH="calc(100vh - 200px)"
         overflowX="auto"
       >
-        {list.map((item) => {
-          return <List />;
-        })}
+        {board?.lists?.length > 0
+          ? board.lists.map((item) => <List key={item.listId} list={item} />)
+          : null}
 
         <Popover
           placement="right"

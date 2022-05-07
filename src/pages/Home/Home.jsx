@@ -1,20 +1,15 @@
-import { useState, useEffect } from "react";
 import { Box, Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { getBoardsService } from "../../services";
+import { useBoards } from "../../contexts";
 import { Navbar, NewBoardModal } from "../../components";
 
 const Home = () => {
-  const [boards, setBoards] = useState([]);
+  const { boards } = useBoards();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-    getBoardsService(setBoards);
-  }, []);
 
   return (
     <Box bg="gray.300" h="100vh">
       <Navbar onOpen={onOpen} />
-      <NewBoardModal boards={boards} isOpen={isOpen} onClose={onClose} />
+      <NewBoardModal isOpen={isOpen} onClose={onClose} />
       <Box
         maxW="1400px"
         mx={{
