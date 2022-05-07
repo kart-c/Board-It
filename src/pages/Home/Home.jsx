@@ -80,3 +80,7 @@ const Home = () => {
       </Box>
     </Box>
   );
+};
+
+export { Home };
+
