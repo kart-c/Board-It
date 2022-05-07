@@ -1,13 +1,13 @@
 import React from 'react';
 import { List } from '../../components';
 import { Box, Button } from '@chakra-ui/react';
-
-import { Navbar } from './../../components';
+import { BoardNavbar } from './../../components';
 import { IoMdAdd } from 'react-icons/io';
-function Board() {
+
+const Board = () => {
 	return (
 		<Box height="100vh" bg="gray.300" minW="max-content">
-			<Navbar />
+			<BoardNavbar />
 			<Box padding="15px" d="flex" gap="6" maxH="calc(100vh - 200px)">
 				<List />
 				<List />
@@ -27,5 +27,5 @@ function Board() {
 			</Box>
 		</Box>
 	);
-}
+};
 export { Board };
