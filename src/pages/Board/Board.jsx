@@ -29,9 +29,7 @@ const Board = () => {
   useEffect(() => {
     const singleBoard = boards.find((board) => board.id === boardId);
     setBoard(singleBoard);
-  }, []);
-
-  console.log("here");
+  }, [boards]);
 
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">

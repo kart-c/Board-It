@@ -7,3 +7,4 @@ export { addCardToListService } from "./addCardToList.service";
 export { updateCardService } from "./updateCard.service";
 export { deleteCardService } from "./deleteCard.service";
 export { addNewListService } from "./addNewList.service";
+export { editListTitleService } from "./editListTitle.service";

@@ -8,10 +8,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
+import { editListTitleService } from "../../services";
 import { NoteModal } from "../NoteModal/NoteModal";
 
 function List({ board, list }) {
-  const [title, setTitle] = useState("placeholder");
+  const [title, setTitle] = useState(list.listTitle);
   const [editTitle, setEditTitle] = useState(false);
   const [modalNote, setModalNote] = useState({ note: "" });
   const [editCardId, setEditCardId] = useState(null);
@@ -48,6 +49,11 @@ function List({ board, list }) {
         value={title}
         mb="3"
         onChange={(e) => setTitle(e.target.value)}
+        onKeyPress={(e) =>
+          e.key === "Enter"
+            ? editListTitleService(board, list.listId, title)
+            : null
+        }
         isReadOnly={editTitle}
         _hover={{
           borderColor: "none",
