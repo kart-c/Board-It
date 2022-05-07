@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { List, Navbar } from '../../components';
-import { Box, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Input,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { BoardNavbar } from './../../components';
 import { IoMdAdd } from 'react-icons/io';
 
 const Board = () => {
+  const initialFocusRef = useRef();
+  const { onOpen, onClose, isOpen } = useDisclosure();
+  const [title, setTitle] = useState('');
+  const [list, setList] = useState([{ list: 'todo' }, { list: 'completed' }]);
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
       <BoardNavbar />
@@ -17,21 +33,55 @@ const Board = () => {
         maxH="calc(100vh - 200px)"
         overflowX="auto"
       >
-        <List />
-        <List />
-        <List />
-        <Button
-          minW="min-content"
-          colorScheme="twitter"
-          textAlign="left"
-          leftIcon={
-            <Box>
-              <IoMdAdd size="24px" />
-            </Box>
-          }
+        {list.map(item => {
+          return <List />;
+        })}
+
+        <Popover
+          placement="right"
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+          initialFocusRef={initialFocusRef}
         >
-          Add a List
-        </Button>
+          <PopoverTrigger>
+            <Button
+              minW="min-content"
+              colorScheme="twitter"
+              textAlign="left"
+              leftIcon={
+                <Box>
+                  <IoMdAdd size="24px" />
+                </Box>
+              }
+            >
+              Add a List
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Add Title</PopoverHeader>
+            <PopoverBody>
+              <Input
+                ref={initialFocusRef}
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+              />
+              <Button
+                mt="2"
+                colorScheme="twitter"
+                onClick={() => {
+                  setList(prev => [...prev, { list: title }]);
+                  onClose();
+                  setTitle('');
+                }}
+              >
+                Save
+              </Button>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
       </Box>
     </Box>
   );

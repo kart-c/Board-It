@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Input, Text, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  IconButton,
+  Input,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { NoteModal } from '../NoteModal/NoteModal';
 function List() {
@@ -8,13 +15,13 @@ function List() {
   const [modalNote, setModalNote] = useState({ note: '' });
   const notes = [
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadad',
     },
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadadasdasdads',
     },
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadadasdasdads',
     },
     {
       note: 'dsaxsd',
@@ -41,17 +48,18 @@ function List() {
       backgroundColor="whiteAlpha.800"
       minW="72"
       maxW="72"
-      p="3"
-      px="2"
+      px="4"
       py="3"
     >
       <Input
-        padding="5px"
+        py="5"
+        px="1"
+        fontSize="xl"
         fontWeight="bold"
         resize="none"
         height={'25px'}
         value={title}
-        mb="2"
+        mb="3"
         onChange={e => setTitle(e.target.value)}
         isReadOnly={editTitle}
         _hover={{
@@ -63,7 +71,7 @@ function List() {
       />
 
       {notes.map(note => (
-        <Box mb="3" d="flex" alignItems="center">
+        <Box mb="3" d="flex" alignItems="center" bg="gray.200" p="2" gap="2">
           <Text
             overflowY="auto"
             w="80%"
@@ -73,14 +81,13 @@ function List() {
           >
             {note.note}
           </Text>
-          <Button
+          <IconButton
+            icon={<FiEdit />}
             onClick={() => {
               setModalNote(note);
               onOpen();
             }}
-          >
-            <FiEdit />
-          </Button>
+          />
         </Box>
       ))}
       <NoteModal isOpen={isOpen} onClose={onClose} modalNote={modalNote} />

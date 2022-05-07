@@ -1,8 +1,8 @@
-import React from "react";
-import { Box, Button, Heading } from "@chakra-ui/react";
-import { FcGoogle } from "react-icons/fc";
-import { googleSignInService, signOutService } from "../../services";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { Box, Button, Heading, IconButton } from '@chakra-ui/react';
+import { FcGoogle } from 'react-icons/fc';
+import { googleSignInService, signOutService } from '../../services';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,10 +24,14 @@ const Login = () => {
           onClick={() => googleSignInService(navigate)}
           colorScheme="twitter"
           size="lg"
+          pl="2"
           leftIcon={
-            <Box bg="white">
-              <FcGoogle size="24px" />
-            </Box>
+            <IconButton
+              bg="white"
+              aria-label="Call Segun"
+              size="md"
+              icon={<FcGoogle size="24px" />}
+            />
           }
         >
           Sign in with Google

@@ -9,6 +9,8 @@ import {
   ModalCloseButton,
   Button,
   Textarea,
+  Select,
+  Box,
 } from '@chakra-ui/react';
 function NoteModal({ isOpen, onClose, modalNote }) {
   const [editNote, setEditNote] = useState({ note: '' });
@@ -37,10 +39,20 @@ function NoteModal({ isOpen, onClose, modalNote }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Box w="32">
+            <Select placeholder="Select option">
+              <option value="placeholder">placeholder</option>
+              <option value="placeholder">placeholder</option>
+              <option value="placeholder">placeholder</option>
+            </Select>
+          </Box>
+
+          <Button colorScheme="twitter" mx={3} onClick={onClose}>
             Save
           </Button>
-          <Button variant="ghost">Close</Button>
+          <Button colorScheme="red" onClick={onClose}>
+            Delete
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

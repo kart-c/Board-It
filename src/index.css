@@ -7,6 +7,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-y: hidden;
 }
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--chakra-colors-gray-500) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: var(--chakra-colors-gray-500);
+}
+
 #root {
   overflow-y: hidden;
 }
