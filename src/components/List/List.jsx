@@ -48,8 +48,7 @@ function List() {
       backgroundColor="whiteAlpha.800"
       minW="72"
       maxW="72"
-      p="3"
-      px="2"
+      px="4"
       py="3"
     >
       <Input
