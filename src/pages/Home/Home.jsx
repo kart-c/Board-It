@@ -26,12 +26,9 @@ const Home = () => {
 				</Heading>
 
 				<Button>Add new Board</Button>
-
-				{currentUser ? (
-					<Button borderRadius="full" h="12" w="12" size="md">
-						{creds}
-					</Button>
-				) : null}
+				<Button borderRadius="full" h="12" w="12" size="md">
+					{currentUser && creds}
+				</Button>
 			</Box>
 			<Box
 				maxW="1400px"
