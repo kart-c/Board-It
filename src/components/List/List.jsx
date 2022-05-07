@@ -52,12 +52,14 @@ function List() {
       py="3"
     >
       <Input
-        padding="5px"
+        py="5"
+        px="1"
+        fontSize="xl"
         fontWeight="bold"
         resize="none"
         height={'25px'}
         value={title}
-        mb="2"
+        mb="3"
         onChange={e => setTitle(e.target.value)}
         isReadOnly={editTitle}
         _hover={{
