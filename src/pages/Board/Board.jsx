@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
 import { useBoards } from "../../contexts";
+import { addNewListService } from "../../services";
 import { List, Navbar, BoardNavbar } from "../../components";
 
 const Board = () => {
@@ -22,14 +23,15 @@ const Board = () => {
   const { boards } = useBoards();
   const initialFocusRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [title, setTitle] = useState("");
-  const [list, setList] = useState([]);
+  const [listInputTitle, setListInputTitle] = useState("");
   const [board, setBoard] = useState({});
 
   useEffect(() => {
     const singleBoard = boards.find((board) => board.id === boardId);
     setBoard(singleBoard);
   }, []);
+
+  console.log("here");
 
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
@@ -77,16 +79,16 @@ const Board = () => {
             <PopoverBody>
               <Input
                 ref={initialFocusRef}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={listInputTitle}
+                onChange={(e) => setListInputTitle(e.target.value)}
               />
               <Button
                 mt="2"
                 colorScheme="twitter"
                 onClick={() => {
-                  setList((prev) => [...prev, { list: title }]);
+                  addNewListService(board, listInputTitle);
                   onClose();
-                  setTitle("");
+                  setListInputTitle("");
                 }}
               >
                 Save
