@@ -16,7 +16,7 @@ const Home = () => {
 					md: 'auto',
 					base: '12',
 				}}
-				my="8"
+				pt="28"
 				d="flex"
 				gap="5"
 				flexWrap="wrap"
