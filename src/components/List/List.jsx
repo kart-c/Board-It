@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Box,
   Button,
@@ -12,11 +12,19 @@ import { editListTitleService } from "../../services";
 import { NoteModal } from "../NoteModal/NoteModal";
 
 function List({ board, list }) {
+  const listInputTitleRef = useRef();
   const [title, setTitle] = useState(list.listTitle);
   const [editTitle, setEditTitle] = useState(false);
   const [modalNote, setModalNote] = useState({ note: "" });
   const [editCardId, setEditCardId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const editListTitle = (e) => {
+    if (e.key === "Enter") {
+      editListTitleService(board, list.listId, title);
+      listInputTitleRef.current.blur();
+    }
+  };
 
   useEffect(() => {
     const toggleEdit = () => {
@@ -48,12 +56,9 @@ function List({ board, list }) {
         height={"25px"}
         value={title}
         mb="3"
+        ref={listInputTitleRef}
         onChange={(e) => setTitle(e.target.value)}
-        onKeyPress={(e) =>
-          e.key === "Enter"
-            ? editListTitleService(board, list.listId, title)
-            : null
-        }
+        onKeyPress={editListTitle}
         isReadOnly={editTitle}
         _hover={{
           borderColor: "none",
