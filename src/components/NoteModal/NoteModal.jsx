@@ -12,7 +12,11 @@ import {
   Select,
   Box,
 } from "@chakra-ui/react";
-import { addCardToListService, updateCardService } from "../../services";
+import {
+  addCardToListService,
+  updateCardService,
+  deleteCardService,
+} from "../../services";
 
 function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
   const [editNote, setEditNote] = useState({ note: "" });
@@ -25,6 +29,11 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
 
   const updateCard = () => {
     updateCardService(board, listId, editCardId, editNote.note);
+    onClose();
+  };
+
+  const deleteCard = () => {
+    deleteCardService(board, listId, editCardId);
     onClose();
   };
 
@@ -68,7 +77,7 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
           >
             Save
           </Button>
-          <Button colorScheme="red" onClick={onClose}>
+          <Button colorScheme="red" onClick={deleteCard}>
             Delete
           </Button>
         </ModalFooter>
