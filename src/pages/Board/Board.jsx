@@ -44,7 +44,9 @@ const Board = () => {
         overflowX="auto"
       >
         {board?.lists?.length > 0
-          ? board.lists.map((item) => <List key={item.listId} list={item} />)
+          ? board.lists.map((item) => (
+              <List key={item.listId} list={item} board={board} />
+            ))
           : null}
 
         <Popover
