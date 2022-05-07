@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter } from 'react-router-dom';
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
+// import { Box, Button } from './theme';
+// console.log(Box);
+const theme = extendTheme({
+  colors: {
+    brand: {
+      200: '#ebecf0',
+    },
+  },
+});
+console.log(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
