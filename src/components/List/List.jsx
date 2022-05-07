@@ -15,13 +15,13 @@ function List() {
   const [modalNote, setModalNote] = useState({ note: '' });
   const notes = [
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadad',
     },
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadadasdasdads',
     },
     {
-      note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
+      note: 'dsassaddasdsdasdadsdadadasdasdads',
     },
     {
       note: 'dsaxsd',
@@ -69,7 +69,7 @@ function List() {
       />
 
       {notes.map(note => (
-        <Box mb="3" d="flex" alignItems="center">
+        <Box mb="3" d="flex" alignItems="center" bg="gray.200" p="2">
           <Text
             overflowY="auto"
             w="80%"
