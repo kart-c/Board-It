@@ -6,11 +6,12 @@ import { useAuth } from "../../contexts/auth-context";
 import { getBoardsService } from "../../services";
 
 const Home = () => {
+
   const navigate = useNavigate();
   const [boards, setBoards] = useState([]);
   const { currentUser } = useAuth();
 
-  useEffect(() => {
+   useEffect(() => {
     getBoardsService(setBoards);
   }, []);
 
@@ -81,6 +82,5 @@ const Home = () => {
     </Box>
   );
 };
-
 export { Home };
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Heading, Input, Textarea, Text } from '@chakra-ui/react';
+import { Box, Button, Input, Text, useDisclosure } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
+import { NoteModal } from '../NoteModal/NoteModal';
 function List() {
   const [title, setTitle] = useState('placeholder');
   const [editTitle, setEditTitle] = useState(false);
+  const [modalNote, setModalNote] = useState({ note: '' });
   const notes = [
     {
       note: 'dsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasdddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdasddsassaddasdsdasdadsdadadasdasdadsadasdadasdaddsasdasdas',
@@ -30,6 +32,7 @@ function List() {
       window.removeEventListener('click', toggleEdit);
     };
   }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       maxH="calc(100vh - 150px)"
@@ -70,12 +73,28 @@ function List() {
           >
             {note.note}
           </Text>
-          <Button>
+          <Button
+            onClick={() => {
+              setModalNote(note);
+              onOpen();
+            }}
+          >
             <FiEdit />
           </Button>
         </Box>
       ))}
-      <Button d="block" textAlign="left" bg="orange.100" mt="5" px="4">
+      <NoteModal isOpen={isOpen} onClose={onClose} modalNote={modalNote} />
+      <Button
+        d="block"
+        textAlign="left"
+        bg="orange.100"
+        mt="5"
+        px="4"
+        onClick={() => {
+          onOpen();
+          setModalNote({ note: '' });
+        }}
+      >
         Add a note
       </Button>
     </Box>
