@@ -11,12 +11,9 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 function NoteModal({ isOpen, onClose, modalNote }) {
-  console.log(modalNote);
   const [editNote, setEditNote] = useState({ note: '' });
-  console.log(editNote);
   const initialRef = useRef();
   useEffect(() => {
-    console.log('in effect');
     setEditNote(modalNote);
   }, [modalNote]);
   return (
