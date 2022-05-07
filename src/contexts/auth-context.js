@@ -8,7 +8,6 @@ const defaultValue = {
   userName: "",
   email: "",
   userImgUrl: "",
-  userBoards: [],
 };
 
 const AuthContext = createContext(defaultValue);
@@ -24,8 +23,8 @@ const AuthContextProvider = ({ children }) => {
           email: user.email,
           id: user.uid,
           userImgUrl: user.photoURL,
-          userBoards: [],
         };
+
         addUserService(userObj);
         setCurrentUser(userObj);
         console.log("Logged In");

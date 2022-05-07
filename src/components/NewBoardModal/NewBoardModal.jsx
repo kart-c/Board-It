@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState } from "react";
 import {
   Button,
   FormControl,
@@ -11,16 +11,23 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-} from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { useAuth } from "../../contexts";
+import { addNewBoardService } from "../../services";
 
-const NewBoardModal = ({ isOpen, onClose }) => {
-  const navigate = useNavigate();
-  const initialRef = useRef();
+const NewBoardModal = ({ isOpen, onClose, boards }) => {
+  const [boardTitleInput, setBoardTitleInput] = useState("");
+  const { currentUser } = useAuth();
+
+  const addNewBoardHandler = () => {
+    addNewBoardService(currentUser, boardTitleInput, boards);
+    setBoardTitleInput("");
+    onClose();
+  };
 
   return (
     <>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent mx="10">
           <ModalHeader>Create New Board</ModalHeader>
@@ -28,15 +35,16 @@ const NewBoardModal = ({ isOpen, onClose }) => {
           <ModalBody pb="6">
             <FormControl>
               <FormLabel>Board name</FormLabel>
-              <Input ref={initialRef} placeholder="Project Management" />
+              <Input
+                value={boardTitleInput}
+                onChange={(e) => setBoardTitleInput(e.target.value)}
+                autoFocus
+                placeholder="Project Management"
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme="twitter"
-              mr="3"
-              onClick={() => navigate('/board')}
-            >
+            <Button colorScheme="twitter" mr="3" onClick={addNewBoardHandler}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

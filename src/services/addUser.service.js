@@ -5,10 +5,14 @@ const addUserService = async (userObj) => {
   try {
     const usersCollectionRef = collection(db, "users");
     const response = await getDocs(usersCollectionRef);
+
     const demoUsers = response.docs.map((doc) => ({
       ...doc.data(),
+      userDocId: doc.id,
     }));
+
     const checkUser = demoUsers.find((user) => user.id === userObj.id);
+    
     if (!checkUser) {
       await addDoc(usersCollectionRef, userObj);
     }
