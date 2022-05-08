@@ -1,9 +1,11 @@
-import { Avatar, Box, Button, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, Box, Button, Heading, Text } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/auth-context';
 
 const Navbar = ({ onOpen, board }) => {
 	const { currentUser } = useAuth();
+	const navigate = useNavigate();
 
 	const boardTitle = board?.boardTitle?.slice(0, 1).toUpperCase() + board?.boardTitle?.slice(1);
 
@@ -22,8 +24,10 @@ const Navbar = ({ onOpen, board }) => {
 			h="80px"
 			zIndex="5"
 		>
-			<Heading as="h1" size="lg">
-				BoardIt
+			<Heading as="h1">
+				<Link to="/home" size="lg">
+					BoardIt
+				</Link>
 			</Heading>
 
 			{onOpen ? (
@@ -36,6 +40,8 @@ const Navbar = ({ onOpen, board }) => {
 				</Text>
 			) : null}
 			<Avatar
+				onClick={() => navigate('/user')}
+				cursor="pointer"
 				name={currentUser.id ? currentUser.userName : ''}
 				src={currentUser.id && currentUser.userImgUrl}
 			/>
