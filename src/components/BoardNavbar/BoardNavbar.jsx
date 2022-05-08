@@ -8,12 +8,19 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useAuth } from "../../contexts";
 import { MemberPopover } from "../MemberPopover/MemberPopover";
 import { SearchPopover } from "../SearchPopover/SearchPopover";
 
 const BoardNavbar = ({ board, query, setQuery }) => {
   const [direction, setDirection] = useState("right");
   const [result, setResult] = useState([]);
+  const { currentUser } = useAuth();
+
+  const isEditor = board
+    ? board.editors.some((item) => item.editorId === currentUser.id)
+    : false;
+
   const getImages = async () => {
     const images = await fetch(
       `https://api.unsplash.com/search/photos?query=${query}&client_id=${"2rANIb_zZdg47kmvAIdqlwY3B1dWaNcx_EcyAQDHGsU"}`
@@ -21,6 +28,7 @@ const BoardNavbar = ({ board, query, setQuery }) => {
     const response = await images.json();
     setResult(response.results);
   };
+
   useEffect(() => {
     const currentSize = (e) =>
       e.target.innerWidth <= 450
@@ -29,6 +37,7 @@ const BoardNavbar = ({ board, query, setQuery }) => {
     window.addEventListener("resize", currentSize);
     return () => window.removeEventListener("resize", currentSize);
   }, []);
+
   return (
     <Box
       d="flex"
@@ -61,7 +70,12 @@ const BoardNavbar = ({ board, query, setQuery }) => {
           placeholder="search"
           bg="whiteAlpha.900"
           value={query}
+          readOnly={!isEditor}
           onChange={(e) => setQuery(e.target.value)}
+          _focus={{
+            outline: isEditor ? "2px solid #1DA1F2" : "none",
+          }}
+          cursor={isEditor ? "text" : "normal"}
         />
         <Popover>
           <PopoverTrigger>
@@ -72,6 +86,7 @@ const BoardNavbar = ({ board, query, setQuery }) => {
               position="absolute"
               aria-label="search"
               icon={<AiOutlineSearch />}
+              disabled={!isEditor}
               onClick={() => getImages()}
             />
           </PopoverTrigger>
