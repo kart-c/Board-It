@@ -17,12 +17,14 @@ import {
   addCardToListService,
   updateCardService,
   deleteCardService,
+  moveCardBetweenListsService,
 } from "../../services";
 
 function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
   const [editNote, setEditNote] = useState({ note: "" });
   const initialRef = useRef();
   const { currentUser } = useAuth();
+  const [moveDropdownValue, setMoveDropdownValue] = useState("Move");
 
   const addCardToList = () => {
     addCardToListService(board, listId, editNote.note, currentUser);
@@ -31,6 +33,10 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
 
   const updateCard = () => {
     updateCardService(board, listId, editCardId, editNote.note, currentUser);
+    if (listId !== moveDropdownValue && moveDropdownValue !== "Move") {
+      moveCardBetweenListsService(board, listId, moveDropdownValue, editCardId);
+      setMoveDropdownValue("Move");
+    }
     onClose();
   };
 
@@ -43,6 +49,11 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
     setEditNote(modalNote);
   }, [modalNote]);
 
+  const modalCloseHandler = () => {
+    setMoveDropdownValue("Move");
+    onClose();
+  };
+
   return (
     <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -50,7 +61,7 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
         <ModalHeader>
           {modalNote.note === "" ? "Add New Note" : "Edit Note"}
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton onClick={modalCloseHandler} />
         <ModalBody>
           <Textarea
             ref={initialRef}
@@ -66,10 +77,16 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
         <ModalFooter>
           {modalNote.note !== "" ? (
             <Box w="32">
-              <Select placeholder="Select option">
-                <option value="placeholder">placeholder</option>
-                <option value="placeholder">placeholder</option>
-                <option value="placeholder">placeholder</option>
+              <Select
+                value={moveDropdownValue}
+                onChange={(e) => setMoveDropdownValue(e.target.value)}
+              >
+                <option value="Move">Move To</option>
+                {board.lists.map((list) => (
+                  <option value={list.listId} key={list.listId}>
+                    {list.listTitle}
+                  </option>
+                ))}
               </Select>
             </Box>
           ) : null}
