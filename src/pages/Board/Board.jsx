@@ -43,7 +43,7 @@ const Board = () => {
 	const isEditor = board ? board.editors.some((item) => item.editorId === currentUser.id) : false;
 
 	return (
-		<Box height="calc(100vh - 150px)" bg="gray.300" minW="max-content" marginTop="150px">
+		<Box height="calc(100vh - 152px)" bg="gray.300" minW="max-content" mt="152px">
 			<Navbar board={board} />
 			<BoardNavbar board={board} />
 			<Box
@@ -51,10 +51,9 @@ const Board = () => {
 				padding="15px"
 				d="flex"
 				gap="6"
-				maxH="calc(100vh - 200px)"
+				h="90%"
 				overflowX="auto"
 				overflowY="hidden"
-				height="max-content"
 			>
 				{board?.lists?.length > 0
 					? board.lists.map((item) => (

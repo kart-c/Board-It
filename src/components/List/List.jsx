@@ -21,7 +21,7 @@ function List({ board, list, isEditor = false }) {
 	return (
 		<Box
 			height="max-content"
-			maxH="calc(100vh - 150px)"
+			maxH="calc(100vh - 250px)"
 			overflowY="auto"
 			borderRadius="10px"
 			backgroundColor="whiteAlpha.800"
