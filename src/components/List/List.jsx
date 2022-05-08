@@ -20,6 +20,7 @@ function List({ board, list }) {
 
 	return (
 		<Box
+			height="max-content"
 			maxH="calc(100vh - 150px)"
 			overflowY="auto"
 			borderRadius="10px"

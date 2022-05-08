@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -36,9 +36,9 @@ const Board = () => {
   }, []);
 
   return (
-    <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
+    <Box height="calc(100vh - 150px)" bg="gray.300" minW="max-content" marginTop="150px">
+      <Navbar board={board} />
       <BoardNavbar board={board} />
-      <Navbar />
       <Box
         width="100vw"
         padding="15px"
@@ -52,54 +52,53 @@ const Board = () => {
               <List key={item.listId} list={item} board={board} />
             ))
           : null}
-
-        <Popover
-          placement="right"
-          isOpen={isOpen}
-          onOpen={onOpen}
-          onClose={onClose}
-          initialFocusRef={initialFocusRef}
-        >
-          <PopoverTrigger>
-            <Button
-              minW="min-content"
-              colorScheme="twitter"
-              textAlign="left"
-              leftIcon={
-                <Box>
-                  <IoMdAdd size="24px" />
-                </Box>
-              }
-            >
-              Add a List
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>Add Title</PopoverHeader>
-            <PopoverBody>
-              <Input
-                ref={initialFocusRef}
-                value={listInputTitle}
-                onChange={(e) => setListInputTitle(e.target.value)}
-              />
-              <Button
-                mt="2"
-                colorScheme="twitter"
-                onClick={() => {
-                  addNewListService(board, listInputTitle);
-                  onClose();
-                  setListInputTitle("");
-                }}
-              >
-                Save
-              </Button>
-            </PopoverBody>
-          </PopoverContent>
-        </Popover>
-      </Box>
-    </Box>
-  );
+				<Popover
+					placement="right"
+					isOpen={isOpen}
+					onOpen={onOpen}
+					onClose={onClose}
+					initialFocusRef={initialFocusRef}
+				>
+					<PopoverTrigger>
+						<Button
+							minW="min-content"
+							colorScheme="twitter"
+							textAlign="left"
+							leftIcon={
+								<Box>
+									<IoMdAdd size="24px" />
+								</Box>
+							}
+						>
+							Add a List
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent>
+						<PopoverArrow />
+						<PopoverCloseButton />
+						<PopoverHeader>Add Title</PopoverHeader>
+						<PopoverBody>
+							<Input
+								ref={initialFocusRef}
+								value={listInputTitle}
+								onChange={(e) => setListInputTitle(e.target.value)}
+							/>
+							<Button
+								mt="2"
+								colorScheme="twitter"
+								onClick={() => {
+									addNewListService(board, listInputTitle);
+									onClose();
+									setListInputTitle('');
+								}}
+							>
+								Save
+							</Button>
+						</PopoverBody>
+					</PopoverContent>
+				</Popover>
+			</Box>
+		</Box>
+	);
 };
 export { Board };
