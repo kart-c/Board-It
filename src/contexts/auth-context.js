@@ -27,10 +27,8 @@ const AuthContextProvider = ({ children }) => {
 
         addUserService(userObj);
         setCurrentUser(userObj);
-        console.log("Logged In");
       } else {
         setCurrentUser(defaultValue);
-        console.log("You're logged Out, Please Login");
       }
     });
   }, []);
