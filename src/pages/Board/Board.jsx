@@ -32,6 +32,8 @@ const Board = () => {
   const [listInputTitle, setListInputTitle] = useState("");
   const [board, setBoard] = useState(null);
 
+  // console.log(board);
+
   useEffect(() => {
     getSingleDocService(boardId, setBoard);
   }, []);
