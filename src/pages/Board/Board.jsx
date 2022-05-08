@@ -54,6 +54,7 @@ const Board = () => {
 				maxH="calc(100vh - 200px)"
 				overflowX="auto"
 				overflowY="hidden"
+				height="max-content"
 			>
 				{board?.lists?.length > 0
 					? board.lists.map((item) => (

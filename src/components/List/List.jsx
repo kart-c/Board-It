@@ -54,13 +54,13 @@ function List({ board, list, isEditor = false }) {
 				cursor={isEditor ? 'text' : 'normal'}
 				w="100%"
 				textOverflow="ellipsis"
-				overFlow="hidden"
+				overflow="hidden"
 			/>
 
 			{list?.cards?.length > 0
 				? list.cards.map((card) => (
-						<Box bg="gray.200" mb="3" p="2">
-							<Box key={card.cardId} d="flex" alignItems="center" gap="2">
+						<Box bg="gray.200" mb="3" p="2" key={card.cardId}>
+							<Box d="flex" alignItems="center" gap="2">
 								<Text overflowY="auto" w="80%" maxH="72" wordBreak="break-all" h="max-content">
 									{card.cardContent}
 								</Text>
