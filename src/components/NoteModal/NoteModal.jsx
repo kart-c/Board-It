@@ -12,6 +12,7 @@ import {
   Select,
   Box,
 } from "@chakra-ui/react";
+import { useAuth } from "../../contexts";
 import {
   addCardToListService,
   updateCardService,
@@ -21,14 +22,15 @@ import {
 function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
   const [editNote, setEditNote] = useState({ note: "" });
   const initialRef = useRef();
+  const { currentUser } = useAuth();
 
   const addCardToList = () => {
-    addCardToListService(board, listId, editNote.note);
+    addCardToListService(board, listId, editNote.note, currentUser);
     onClose();
   };
 
   const updateCard = () => {
-    updateCardService(board, listId, editCardId, editNote.note);
+    updateCardService(board, listId, editCardId, editNote.note, currentUser);
     onClose();
   };
 
