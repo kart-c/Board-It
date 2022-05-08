@@ -37,6 +37,7 @@ BoardIt is a visual tool where you can manage and track all your tasks and proje
 - [Firebase](https://firebase.google.com/)
 - [Chakra UI](https://chakra-ui.com/)
 - [Unsplash](https://unsplash.com/)
+- [Beautiful DND](https://www.npmjs.com/package/react-beautiful-dnd)
 
 ---
 
