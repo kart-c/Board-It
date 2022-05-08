@@ -55,9 +55,9 @@ const MemberPopover = ({ board }) => {
 												<IconButton
 													aria-label="Allow Permission"
 													size="sm"
-													colorScheme="whatsapp"
+													colorScheme="red"
 													color="white"
-													icon={<MdOutlineEdit size="24px" />}
+													icon={<MdOutlineEditOff size="24px" />}
 													onClick={() => addUserToEditorsService(visitor, board)}
 												/>
 											</Tooltip>
@@ -91,9 +91,9 @@ const MemberPopover = ({ board }) => {
 											<IconButton
 												aria-label="Revoke Permission"
 												size="sm"
-												colorScheme="red"
+												colorScheme="whatsapp"
 												color="white"
-												icon={<MdOutlineEditOff size="24px" />}
+												icon={<MdOutlineEdit size="24px" />}
 												onClick={() => removeUserFromEditorsService(editor, board)}
 											/>
 										</Tooltip>
