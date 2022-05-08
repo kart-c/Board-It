@@ -10,3 +10,5 @@ export { addNewListService } from "./addNewList.service";
 export { editListTitleService } from "./editListTitle.service";
 export { addUserAsVisitorService } from "./addUserAsVisitor.service";
 export { getSingleDocService } from "./getSingleDoc.service";
+export { addUserToEditorsService } from "./addUserToEditor.service";
+export { removeUserFromEditorsService } from "./removeUserFromEditors.service";
