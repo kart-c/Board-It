@@ -13,8 +13,21 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineCancel } from "react-icons/md";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { useAuth } from "../../contexts";
+import {
+  addUserToEditorsService,
+  removeUserFromEditorsService,
+} from "../../services";
 
 const MemberPopover = ({ board }) => {
+  const { currentUser } = useAuth();
+
+  // const isEditor = board
+  //   ? board.editors.some((item) => item.editorId === currentUser.id)
+  //   : false;
+
+  const isAdmin = board ? board.adminId === currentUser.id : false;
+
   return (
     <>
       <Portal>
@@ -45,13 +58,16 @@ const MemberPopover = ({ board }) => {
                       </Text>
                     </Box>
                     {/* Revoke permission */}
-                    <IconButton
-                      aria-label="Allow Member" // Cancel Permission
-                      size="sm"
-                      colorScheme="red"
-                      color="white"
-                      icon={<MdOutlineCancel size="24px" />}
-                    />
+                    {isAdmin && (
+                      <IconButton
+                        aria-label="Allow Member" // Cancel Permission
+                        size="sm"
+                        colorScheme="red"
+                        color="white"
+                        icon={<MdOutlineCancel size="24px" />}
+                        onClick={() => addUserToEditorsService(visitor, board)}
+                      />
+                    )}
                   </Box>
                 ))
               : null}
@@ -77,13 +93,18 @@ const MemberPopover = ({ board }) => {
                     </Text>
                   </Box>
                   {/* Revoke permission */}
-                  <IconButton
-                    aria-label="Allow Member" // Cancel Permission
-                    size="sm"
-                    colorScheme="whatsapp"
-                    color="white"
-                    icon={<AiOutlineCheckCircle size="24px" />}
-                  />
+                  {isAdmin && currentUser.id !== editor.editorId && (
+                    <IconButton
+                      aria-label="Allow Member" // Cancel Permission
+                      size="sm"
+                      colorScheme="whatsapp"
+                      color="white"
+                      icon={<AiOutlineCheckCircle size="24px" />}
+                      onClick={() =>
+                        removeUserFromEditorsService(editor, board)
+                      }
+                    />
+                  )}
                 </Box>
               ))}
           </PopoverBody>

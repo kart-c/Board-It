@@ -35,12 +35,18 @@ const Board = () => {
   }, []);
 
   useEffect(() => {
-    if (board && currentUser?.id !== board?.adminId) {
+    if (
+      board &&
+      currentUser?.id !== board?.adminId &&
+      !board.editors.some((item) => item.editorId === currentUser.id)
+    ) {
       addUserAsVisitorService(board, currentUser);
     }
   }, [board?.id]);
 
-  console.log("board");
+  const isEditor = board
+    ? board.editors.some((item) => item.editorId === currentUser.id)
+    : false;
 
   return (
     <Box
@@ -61,7 +67,12 @@ const Board = () => {
       >
         {board?.lists?.length > 0
           ? board.lists.map((item) => (
-              <List key={item.listId} list={item} board={board} />
+              <List
+                isEditor={isEditor}
+                key={item.listId}
+                list={item}
+                board={board}
+              />
             ))
           : null}
         <Popover
@@ -71,20 +82,22 @@ const Board = () => {
           onClose={onClose}
           initialFocusRef={initialFocusRef}
         >
-          <PopoverTrigger>
-            <Button
-              minW="min-content"
-              colorScheme="twitter"
-              textAlign="left"
-              leftIcon={
-                <Box>
-                  <IoMdAdd size="24px" />
-                </Box>
-              }
-            >
-              Add a List
-            </Button>
-          </PopoverTrigger>
+          {isEditor && (
+            <PopoverTrigger>
+              <Button
+                minW="min-content"
+                colorScheme="twitter"
+                textAlign="left"
+                leftIcon={
+                  <Box>
+                    <IoMdAdd size="24px" />
+                  </Box>
+                }
+              >
+                Add a List
+              </Button>
+            </PopoverTrigger>
+          )}
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
