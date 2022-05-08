@@ -45,6 +45,7 @@ function List({ board, list, isEditor = false }) {
         resize="none"
         height={"25px"}
         value={title}
+        readOnly={!isEditor}
         mb="3"
         ref={listInputTitleRef}
         onChange={(e) => setTitle(e.target.value)}
