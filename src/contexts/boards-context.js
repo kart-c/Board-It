@@ -11,7 +11,7 @@ const BoardsProvider = ({ children }) => {
   }, []);
 
   return (
-    <BoardsContext.Provider value={{ boards }}>
+    <BoardsContext.Provider value={{ boards, setBoards }}>
       {children}
     </BoardsContext.Provider>
   );
