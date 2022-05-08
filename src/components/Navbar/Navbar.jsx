@@ -35,7 +35,7 @@ const Navbar = ({ onOpen, board }) => {
 					Add new Board
 				</Button>
 			) : boardTitle ? (
-				<Text fontSize="lg" fontWeight="700" letterSpacing="1px">
+				<Text fontSize="32px" fontWeight="700" letterSpacing="1px">
 					{boardTitle}
 				</Text>
 			) : null}

@@ -12,6 +12,7 @@ import {
   Select,
   Box,
 } from "@chakra-ui/react";
+import { useAuth } from "../../contexts";
 import {
   addCardToListService,
   updateCardService,
@@ -21,14 +22,15 @@ import {
 function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
   const [editNote, setEditNote] = useState({ note: "" });
   const initialRef = useRef();
+  const { currentUser } = useAuth();
 
   const addCardToList = () => {
-    addCardToListService(board, listId, editNote.note);
+    addCardToListService(board, listId, editNote.note, currentUser);
     onClose();
   };
 
   const updateCard = () => {
-    updateCardService(board, listId, editCardId, editNote.note);
+    updateCardService(board, listId, editCardId, editNote.note, currentUser);
     onClose();
   };
 
@@ -46,7 +48,7 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {editNote.note === "" ? "Add New Note" : "Edit Note"}
+          {modalNote.note === "" ? "Add New Note" : "Edit Note"}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -62,13 +64,15 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
         </ModalBody>
 
         <ModalFooter>
-          <Box w="32">
-            <Select placeholder="Select option">
-              <option value="placeholder">placeholder</option>
-              <option value="placeholder">placeholder</option>
-              <option value="placeholder">placeholder</option>
-            </Select>
-          </Box>
+          {modalNote.note !== "" ? (
+            <Box w="32">
+              <Select placeholder="Select option">
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+              </Select>
+            </Box>
+          ) : null}
 
           <Button
             colorScheme="twitter"
@@ -77,9 +81,12 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
           >
             Save
           </Button>
-          <Button colorScheme="red" onClick={deleteCard}>
-            Delete
-          </Button>
+
+          {modalNote.note !== "" ? (
+            <Button colorScheme="red" onClick={deleteCard}>
+              Delete
+            </Button>
+          ) : null}
         </ModalFooter>
       </ModalContent>
     </Modal>

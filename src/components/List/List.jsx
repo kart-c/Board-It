@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 import {
   Box,
   Button,
@@ -6,20 +6,22 @@ import {
   Input,
   Text,
   useDisclosure,
-} from '@chakra-ui/react';
-import { FiEdit } from 'react-icons/fi';
-import { editListTitleService } from '../../services';
-import { NoteModal } from '../NoteModal/NoteModal';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+} from "@chakra-ui/react";
+import { FiEdit } from "react-icons/fi";
+import { editListTitleService } from "../../services";
+import { NoteModal } from "../NoteModal/NoteModal";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import { getCapitalisedFirstName } from "../../utils/getCapitalisedFirstName";
+
 function List({ board, list, isEditor = false }) {
   const listInputTitleRef = useRef();
   const [title, setTitle] = useState(list.listTitle);
-  const [modalNote, setModalNote] = useState({ note: '' });
+  const [modalNote, setModalNote] = useState({ note: "" });
   const [editCardId, setEditCardId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const editListTitle = e => {
-    if (e.key === 'Enter') {
+  const editListTitle = (e) => {
+    if (e.key === "Enter") {
       editListTitleService(board, list.listId, title);
       listInputTitleRef.current.blur();
     }
@@ -47,22 +49,22 @@ function List({ board, list, isEditor = false }) {
             fontSize="xl"
             fontWeight="bold"
             resize="none"
-            height={'25px'}
+            height={"25px"}
             value={title}
             readOnly={!isEditor}
             mb="3"
             ref={listInputTitleRef}
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             onKeyPress={editListTitle}
             _hover={{
-              borderColor: 'none',
+              borderColor: "none",
             }}
             _focus={{
-              outline: isEditor ? '2px solid #1DA1F2' : 'none',
+              outline: isEditor ? "2px solid #1DA1F2" : "none",
             }}
             border="none"
             backgroundColor="whiteAlpha.100"
-            cursor={isEditor ? 'text' : 'normal'}
+            cursor={isEditor ? "text" : "normal"}
             w="100%"
             textOverflow="ellipsis"
             overflow="hidden"
@@ -80,7 +82,7 @@ function List({ board, list, isEditor = false }) {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      boxShadow={snapshot.isDragging ? 'lg' : ''}
+                      boxShadow={snapshot.isDragging ? "lg" : ""}
                       key={card.cardId}
                       draggableId={card.cardId}
                       index={index}
@@ -102,7 +104,7 @@ function List({ board, list, isEditor = false }) {
                           <IconButton
                             icon={<FiEdit />}
                             onClick={() => {
-                              setModalNote(card);
+                              setModalNote({ note: card.cardContent });
                               setEditCardId(card.cardId);
                               onOpen();
                             }}
@@ -118,8 +120,11 @@ function List({ board, list, isEditor = false }) {
                         d="flex"
                         justifyContent="space-between"
                       >
-                        <Text>Last Edited: Kartik</Text>
-                        <Text>{new Date('03/13/2011').toDateString()}</Text>
+                        <Text>
+                          Last Edited:{" "}
+                          {getCapitalisedFirstName(card.lastEditedBy)}
+                        </Text>
+                        <Text>{card.lastEditTime}</Text>
                       </Box>
                     </Box>
                   )}
@@ -143,7 +148,7 @@ function List({ board, list, isEditor = false }) {
               px="4"
               onClick={() => {
                 onOpen();
-                setModalNote({ note: '' });
+                setModalNote({ note: "" });
               }}
             >
               Add a note

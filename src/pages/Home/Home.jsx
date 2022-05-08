@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -10,11 +11,18 @@ import {
 } from "@chakra-ui/react";
 import { useBoards } from "../../contexts";
 import { Navbar, NewBoardModal } from "../../components";
+import { getBoardsService } from "../../services";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { boards } = useBoards();
+  const { boards, setBoards } = useBoards();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (boards.length < 1) {
+      getBoardsService(setBoards);
+    }
+  }, []);
 
   return (
     <Box bg="gray.300" minH="100vh">
