@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -15,14 +16,18 @@ import {
 import { useAuth } from "../../contexts";
 import { addNewBoardService } from "../../services";
 
-const NewBoardModal = ({ isOpen, onClose, boards }) => {
+const NewBoardModal = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const [boardTitleInput, setBoardTitleInput] = useState("");
   const { currentUser } = useAuth();
 
   const addNewBoardHandler = () => {
-    addNewBoardService(currentUser, boardTitleInput, boards);
-    setBoardTitleInput("");
-    onClose();
+    if (boardTitleInput.trim()) {
+      const response = addNewBoardService(currentUser, boardTitleInput);
+      setBoardTitleInput("");
+      onClose();
+      response.then((data) => navigate(`/board/${data}`));
+    }
   };
 
   return (

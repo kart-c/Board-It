@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { List, Navbar } from '../../components';
+import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,15 +12,25 @@ import {
   PopoverHeader,
   PopoverTrigger,
   useDisclosure,
-} from '@chakra-ui/react';
-import { BoardNavbar } from './../../components';
-import { IoMdAdd } from 'react-icons/io';
+} from "@chakra-ui/react";
+import { IoMdAdd } from "react-icons/io";
+import { useBoards } from "../../contexts";
+import { addNewListService } from "../../services";
+import { List, Navbar, BoardNavbar } from "../../components";
 
 const Board = () => {
+  const { boardId } = useParams();
+  const { boards } = useBoards();
   const initialFocusRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [title, setTitle] = useState('');
-  const [list, setList] = useState([{ list: 'todo' }, { list: 'completed' }]);
+  const [listInputTitle, setListInputTitle] = useState("");
+  const [board, setBoard] = useState({});
+
+  useEffect(() => {
+    const singleBoard = boards.find((board) => board.id === boardId);
+    setBoard(singleBoard);
+  }, [boards]);
+
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
       <BoardNavbar />
@@ -33,9 +43,11 @@ const Board = () => {
         maxH="calc(100vh - 200px)"
         overflowX="auto"
       >
-        {list.map(item => {
-          return <List />;
-        })}
+        {board?.lists?.length > 0
+          ? board.lists.map((item) => (
+              <List key={item.listId} list={item} board={board} />
+            ))
+          : null}
 
         <Popover
           placement="right"
@@ -65,16 +77,16 @@ const Board = () => {
             <PopoverBody>
               <Input
                 ref={initialFocusRef}
-                value={title}
-                onChange={e => setTitle(e.target.value)}
+                value={listInputTitle}
+                onChange={(e) => setListInputTitle(e.target.value)}
               />
               <Button
                 mt="2"
                 colorScheme="twitter"
                 onClick={() => {
-                  setList(prev => [...prev, { list: title }]);
+                  addNewListService(board, listInputTitle);
                   onClose();
-                  setTitle('');
+                  setListInputTitle("");
                 }}
               >
                 Save

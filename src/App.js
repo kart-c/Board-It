@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import { Home, Login, Board } from './pages';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import { Home, Login, Board } from "./pages";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/board" element={<Board />} />
+        <Route path="/board/:boardId" element={<Board />} />
       </Routes>
     </>
   );
