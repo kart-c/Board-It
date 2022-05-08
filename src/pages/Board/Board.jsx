@@ -51,43 +51,45 @@ const Board = () => {
     : false;
 
   const onDragEnd = (result) => {
-    const { destination, source } = result;
-    if (!destination) return;
-    if (source.droppableId !== destination.droppableId) {
-      const sourceList = board.lists.filter(
-        (list) => list.listTitle === source.droppableId
-      )[0];
+    if (isEditor) {
+      const { destination, source } = result;
+      if (!destination) return;
+      if (source.droppableId !== destination.droppableId) {
+        const sourceList = board.lists.filter(
+          (list) => list.listTitle === source.droppableId
+        )[0];
 
-      const destinationList = board.lists.filter(
-        (list) => list.listTitle === destination.droppableId
-      )[0];
+        const destinationList = board.lists.filter(
+          (list) => list.listTitle === destination.droppableId
+        )[0];
 
-      const temp = sourceList.cards[source.index];
-      sourceList.cards.splice(source.index, 1);
-      destinationList.cards.splice(destination.index, 0, temp);
-      setBoard((prev) => {
-        return {
-          ...prev,
-          lists: prev.lists
-            .filter(
-              (list) =>
-                list.listTitle !== source.droppableId &&
-                list.listTitle !== destination.droppableId
-            )
-            .concat([destinationList, sourceList]),
-        };
-      });
+        const temp = sourceList.cards[source.index];
+        sourceList.cards.splice(source.index, 1);
+        destinationList.cards.splice(destination.index, 0, temp);
+        setBoard((prev) => {
+          return {
+            ...prev,
+            lists: prev.lists
+              .filter(
+                (list) =>
+                  list.listTitle !== source.droppableId &&
+                  list.listTitle !== destination.droppableId
+              )
+              .concat([destinationList, sourceList]),
+          };
+        });
+      }
+      if (source.droppableId === destination.droppableId) {
+        const sourceList = board.lists.filter(
+          (list) => list.listTitle === source.droppableId
+        )[0];
+        const temp = sourceList.cards[source.index];
+        sourceList.cards.splice(source.index, 1);
+        sourceList.cards.splice(destination.index, 0, temp);
+      }
+
+      updateBoardListsService(board);
     }
-    if (source.droppableId === destination.droppableId) {
-      const sourceList = board.lists.filter(
-        (list) => list.listTitle === source.droppableId
-      )[0];
-      const temp = sourceList.cards[source.index];
-      sourceList.cards.splice(source.index, 1);
-      sourceList.cards.splice(destination.index, 0, temp);
-    }
-
-    updateBoardListsService(board);
   };
 
   return (
