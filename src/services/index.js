@@ -14,3 +14,4 @@ export { addUserToEditorsService } from "./addUserToEditor.service";
 export { removeUserFromEditorsService } from "./removeUserFromEditors.service";
 export { updateBoardListsService } from "./updateBoardLists.service";
 export { moveCardBetweenListsService } from "./moveCardBetweenLists.service";
+export { addBackgroundImageToBoardService } from "./addBackgroundImageToBoard.service";

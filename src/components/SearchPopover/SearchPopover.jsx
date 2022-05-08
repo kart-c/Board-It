@@ -2,17 +2,15 @@ import {
   Box,
   Grid,
   Image,
-  Popover,
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
   PopoverHeader,
-} from '@chakra-ui/react';
-import React from 'react';
+} from "@chakra-ui/react";
+import { addBackgroundImageToBoardService } from "../../services";
 
-const SearchPopover = ({ query, result, setBg }) => {
-  console.log(result);
+const SearchPopover = ({ board, query, result }) => {
   return (
     <PopoverContent overflowY="auto" py="2" w="min-content">
       <PopoverArrow />
@@ -20,15 +18,16 @@ const SearchPopover = ({ query, result, setBg }) => {
       <PopoverHeader>Showing Results</PopoverHeader>
       <PopoverBody h="500px" d="flex" p="3" m="0">
         {!query ? (
-          'Enter a query'
+          "Enter a query"
         ) : (
           <Grid templateColumns="repeat(2, 1fr)" gap="5">
-            {result.map(item => {
+            {result.map((item) => {
               return (
                 <Box
+                  key={item.id}
                   w="150px"
                   onClick={() => {
-                    setBg(item.urls.full);
+                    addBackgroundImageToBoardService(board, item.urls.full);
                   }}
                 >
                   <Image

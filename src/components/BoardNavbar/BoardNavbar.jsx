@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -6,29 +6,28 @@ import {
   Input,
   Popover,
   PopoverTrigger,
-} from '@chakra-ui/react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { MemberPopover } from '../MemberPopover/MemberPopover';
-import { SearchPopover } from '../SearchPopover/SearchPopover';
+} from "@chakra-ui/react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { MemberPopover } from "../MemberPopover/MemberPopover";
+import { SearchPopover } from "../SearchPopover/SearchPopover";
 
-const BoardNavbar = ({ board, query, setQuery, setBg }) => {
-  const [direction, setDirection] = useState('right');
+const BoardNavbar = ({ board, query, setQuery }) => {
+  const [direction, setDirection] = useState("right");
   const [result, setResult] = useState([]);
   const getImages = async () => {
     const images = await fetch(
-      `https://api.unsplash.com/search/photos?query=${query}&client_id=${'2rANIb_zZdg47kmvAIdqlwY3B1dWaNcx_EcyAQDHGsU'}`
+      `https://api.unsplash.com/search/photos?query=${query}&client_id=${"2rANIb_zZdg47kmvAIdqlwY3B1dWaNcx_EcyAQDHGsU"}`
     );
     const response = await images.json();
-    console.log(response);
     setResult(response.results);
   };
   useEffect(() => {
-    const currentSize = e =>
+    const currentSize = (e) =>
       e.target.innerWidth <= 450
-        ? setDirection('bottom')
-        : setDirection('right');
-    window.addEventListener('resize', currentSize);
-    return () => window.removeEventListener('resize', currentSize);
+        ? setDirection("bottom")
+        : setDirection("right");
+    window.addEventListener("resize", currentSize);
+    return () => window.removeEventListener("resize", currentSize);
   }, []);
   return (
     <Box
@@ -62,7 +61,7 @@ const BoardNavbar = ({ board, query, setQuery, setBg }) => {
           placeholder="search"
           bg="whiteAlpha.900"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <Popover>
           <PopoverTrigger>
@@ -76,7 +75,7 @@ const BoardNavbar = ({ board, query, setQuery, setBg }) => {
               onClick={() => getImages()}
             />
           </PopoverTrigger>
-          <SearchPopover query={query} result={result} setBg={setBg} />
+          <SearchPopover board={board} query={query} result={result} />
         </Popover>
       </Box>
     </Box>

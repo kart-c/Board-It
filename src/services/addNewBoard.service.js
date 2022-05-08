@@ -18,6 +18,7 @@ const addNewBoardService = async (user, boardTitle) => {
       editors: [editorUserObj],
       lists: [],
       visitors: [],
+      backgroundImg: "",
     };
     const response = await addDoc(boardsCollectionRef, boardObj);
     return response.id;
