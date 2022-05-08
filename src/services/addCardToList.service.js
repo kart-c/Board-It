@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { getCurrentTimeAndDate } from "../utils/getCurrentTimeAndDate";
 
 const addCardToListService = async (
   board,
@@ -10,18 +11,17 @@ const addCardToListService = async (
 ) => {
   try {
     const boardDoc = doc(db, "boards", board.id);
-    const todaysDate = new Date().toDateString();
 
     const cardObj = {
       cardId: uuid(),
       cardContent: cardContent,
       lastEditedBy: currentUser.userName,
-      lastEditTime: todaysDate,
+      lastEditTime: getCurrentTimeAndDate(),
     };
 
     let cardList = board.lists.find((item) => item.listId === listId);
 
-    cardList = { ...cardList, cards: [...cardList.cards, cardObj] };
+    cardList = { ...cardList, cards: [...cardList.cards, cardObj]};
 
     const otherLists = board.lists.filter((item) => item.listId !== listId);
 
