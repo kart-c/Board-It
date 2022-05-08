@@ -32,10 +32,15 @@ const Board = () => {
 
   useEffect(() => {
     getSingleDocService(boardId, setBoard);
+  }, []);
+
+  useEffect(() => {
     if (board && currentUser?.id !== board?.adminId) {
       addUserAsVisitorService(board, currentUser);
     }
-  }, []);
+  }, [board?.id]);
+
+  console.log("board");
 
   return (
     <Box
