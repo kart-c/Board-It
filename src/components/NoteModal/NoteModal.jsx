@@ -48,7 +48,7 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {editNote.note === "" ? "Add New Note" : "Edit Note"}
+          {modalNote.note === "" ? "Add New Note" : "Edit Note"}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -64,13 +64,15 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
         </ModalBody>
 
         <ModalFooter>
-          <Box w="32">
-            <Select placeholder="Select option">
-              <option value="placeholder">placeholder</option>
-              <option value="placeholder">placeholder</option>
-              <option value="placeholder">placeholder</option>
-            </Select>
-          </Box>
+          {modalNote.note !== "" ? (
+            <Box w="32">
+              <Select placeholder="Select option">
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+                <option value="placeholder">placeholder</option>
+              </Select>
+            </Box>
+          ) : null}
 
           <Button
             colorScheme="twitter"
@@ -79,9 +81,12 @@ function NoteModal({ board, listId, isOpen, onClose, modalNote, editCardId }) {
           >
             Save
           </Button>
-          <Button colorScheme="red" onClick={deleteCard}>
-            Delete
-          </Button>
+
+          {modalNote.note !== "" ? (
+            <Button colorScheme="red" onClick={deleteCard}>
+              Delete
+            </Button>
+          ) : null}
         </ModalFooter>
       </ModalContent>
     </Modal>

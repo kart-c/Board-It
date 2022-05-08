@@ -104,7 +104,7 @@ function List({ board, list, isEditor = false }) {
                           <IconButton
                             icon={<FiEdit />}
                             onClick={() => {
-                              setModalNote(card);
+                              setModalNote({ note: card.cardContent });
                               setEditCardId(card.cardId);
                               onOpen();
                             }}
