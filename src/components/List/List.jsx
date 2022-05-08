@@ -54,10 +54,11 @@ function List({ board, list, isEditor = false }) {
           borderColor: "none",
         }}
         _focus={{
-          outline: "2px solid #1DA1F2",
+          outline: isEditor ? "2px solid #1DA1F2" : "none",
         }}
         border="none"
         backgroundColor="whiteAlpha.100"
+        cursor={isEditor ? "text" : "normal"}
       />
 
       {list?.cards?.length > 0
