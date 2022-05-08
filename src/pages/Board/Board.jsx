@@ -31,8 +31,10 @@ const Board = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [listInputTitle, setListInputTitle] = useState('');
   const [board, setBoard] = useState(null);
+
   const [query, setQuery] = useState('');
   const [bg, setBg] = useState('');
+
   useEffect(() => {
     getSingleDocService(boardId, setBoard);
   }, []);
