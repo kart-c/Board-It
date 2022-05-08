@@ -17,38 +17,20 @@ const User = () => {
 		<div>
 			<Navbar />
 			<Box minH="calc(100vh - 80px)" bg="gray.300" mt="80px" px="8">
-				<Flex
-					alignItems="center"
-					mx="auto"
-					w="max-content"
-					p="5"
-					pt="10"
-					flexDir={{
-						sm: 'row',
-						base: 'column',
-					}}
-				>
-					<Heading
-						as="h2"
-						size="md"
-						order={{
-							sm: '0',
-							base: '2',
-						}}
-					>
-						{currentUser?.userName}
-					</Heading>
+				<Flex alignItems="center" mx="auto" w="max-content" p="5" pt="10" flexDir="column">
 					<Avatar
-						mb={{ sm: '0', base: '8' }}
 						size="lg"
 						src={currentUser?.userImgUrl}
 						name={currentUser?.userName}
-						ml={{ sm: '8', base: '0' }}
+						mb="6"
 						borderRadius="full"
 					/>
+					<Heading as="h2" size="md">
+						{currentUser?.userName}
+					</Heading>
 				</Flex>
 				<Text fontSize="32px">My Boards</Text>
-				<Flex flexDir={{ sm: 'row', base: 'column' }} gap="4" mt="4">
+				<Flex flexDir={{ sm: 'row', base: 'column' }} gap="6" mt="4">
 					{userBoards?.length > 0 ? (
 						userBoards.map((board) => (
 							<Box
@@ -60,6 +42,7 @@ const User = () => {
 								flexDir="column"
 								boxShadow="lg"
 								borderRadius="10px"
+								w="60"
 							>
 								<Heading as="h4" size="md">
 									{board.boardTitle}
