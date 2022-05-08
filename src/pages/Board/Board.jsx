@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -12,27 +12,28 @@ import {
   PopoverHeader,
   PopoverTrigger,
   useDisclosure,
-} from "@chakra-ui/react";
-import { DragDropContext } from "react-beautiful-dnd";
+} from '@chakra-ui/react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import {
   addNewListService,
   addUserAsVisitorService,
   getSingleDocService,
   updateBoardListsService,
-} from "../../services";
-import { List, Navbar, BoardNavbar } from "../../components";
-import { IoMdAdd } from "react-icons/io";
-import { useAuth } from "../../contexts";
+} from '../../services';
+import { List, Navbar, BoardNavbar } from '../../components';
+import { IoMdAdd } from 'react-icons/io';
+import { useAuth } from '../../contexts';
 
 const Board = () => {
   const { boardId } = useParams();
   const { currentUser } = useAuth();
   const initialFocusRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [listInputTitle, setListInputTitle] = useState("");
+  const [listInputTitle, setListInputTitle] = useState('');
   const [board, setBoard] = useState(null);
 
-  // console.log(board);
+  const [query, setQuery] = useState('');
+  const [bg, setBg] = useState('');
 
   useEffect(() => {
     getSingleDocService(boardId, setBoard);
@@ -42,38 +43,38 @@ const Board = () => {
     if (
       board &&
       currentUser?.id !== board?.adminId &&
-      !board.editors.some((item) => item.editorId === currentUser.id)
+      !board.editors.some(item => item.editorId === currentUser.id)
     ) {
       addUserAsVisitorService(board, currentUser);
     }
   }, [board?.id]);
 
   const isEditor = board
-    ? board.editors.some((item) => item.editorId === currentUser.id)
+    ? board.editors.some(item => item.editorId === currentUser.id)
     : false;
 
-  const onDragEnd = (result) => {
+  const onDragEnd = result => {
     if (isEditor) {
       const { destination, source } = result;
       if (!destination) return;
       if (source.droppableId !== destination.droppableId) {
         const sourceList = board.lists.filter(
-          (list) => list.listTitle === source.droppableId
+          list => list.listTitle === source.droppableId
         )[0];
 
         const destinationList = board.lists.filter(
-          (list) => list.listTitle === destination.droppableId
+          list => list.listTitle === destination.droppableId
         )[0];
 
         const temp = sourceList.cards[source.index];
         sourceList.cards.splice(source.index, 1);
         destinationList.cards.splice(destination.index, 0, temp);
-        setBoard((prev) => {
+        setBoard(prev => {
           return {
             ...prev,
             lists: prev.lists
               .filter(
-                (list) =>
+                list =>
                   list.listTitle !== source.droppableId &&
                   list.listTitle !== destination.droppableId
               )
@@ -83,7 +84,7 @@ const Board = () => {
       }
       if (source.droppableId === destination.droppableId) {
         const sourceList = board.lists.filter(
-          (list) => list.listTitle === source.droppableId
+          list => list.listTitle === source.droppableId
         )[0];
         const temp = sourceList.cards[source.index];
         sourceList.cards.splice(source.index, 1);
@@ -99,11 +100,19 @@ const Board = () => {
       <Box
         height="calc(100vh - 152px)"
         bg="gray.300"
+        backgroundImage={bg}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
         minW="max-content"
         mt="152px"
       >
         <Navbar board={board} />
-        <BoardNavbar board={board} />
+        <BoardNavbar
+          board={board}
+          setQuery={setQuery}
+          query={query}
+          setBg={setBg}
+        />
         <Box
           width="100vw"
           padding="15px"
@@ -114,7 +123,7 @@ const Board = () => {
           overflowY="hidden"
         >
           {board?.lists?.length > 0
-            ? board.lists.map((item) => (
+            ? board.lists.map(item => (
                 <List
                   isEditor={isEditor}
                   key={item.listId}
@@ -154,7 +163,7 @@ const Board = () => {
                 <Input
                   ref={initialFocusRef}
                   value={listInputTitle}
-                  onChange={(e) => setListInputTitle(e.target.value)}
+                  onChange={e => setListInputTitle(e.target.value)}
                 />
                 <Button
                   mt="2"
@@ -162,7 +171,7 @@ const Board = () => {
                   onClick={() => {
                     addNewListService(board, listInputTitle);
                     onClose();
-                    setListInputTitle("");
+                    setListInputTitle('');
                   }}
                 >
                   Save
