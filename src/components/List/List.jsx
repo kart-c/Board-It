@@ -14,7 +14,6 @@ import { NoteModal } from "../NoteModal/NoteModal";
 function List({ board, list }) {
   const listInputTitleRef = useRef();
   const [title, setTitle] = useState(list.listTitle);
-  const [editTitle, setEditTitle] = useState(false);
   const [modalNote, setModalNote] = useState({ note: "" });
   const [editCardId, setEditCardId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -25,16 +24,6 @@ function List({ board, list }) {
       listInputTitleRef.current.blur();
     }
   };
-
-  useEffect(() => {
-    const toggleEdit = () => {
-      setEditTitle(false);
-    };
-    window.addEventListener("click", toggleEdit);
-    return () => {
-      window.removeEventListener("click", toggleEdit);
-    };
-  }, []);
 
   return (
     <Box
@@ -59,12 +48,13 @@ function List({ board, list }) {
         ref={listInputTitleRef}
         onChange={(e) => setTitle(e.target.value)}
         onKeyPress={editListTitle}
-        isReadOnly={editTitle}
         _hover={{
           borderColor: "none",
         }}
+        _focus={{
+          outline: "2px solid #1DA1F2",
+        }}
         border="none"
-        outline="none"
         backgroundColor="whiteAlpha.100"
       />
 
