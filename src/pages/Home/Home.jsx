@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useBoards } from "../../contexts";
 import { Navbar, NewBoardModal } from "../../components";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { boards } = useBoards();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -43,7 +45,12 @@ const Home = () => {
                   <Text fontSize="sm" casing="capitalize" mr="auto">
                     {board.adminName}
                   </Text>
-                  <Button w="fit-content">Join</Button>
+                  <Button
+                    w="fit-content"
+                    onClick={() => navigate(`/board/${board.id}`)}
+                  >
+                    Join
+                  </Button>
                 </Box>
               </Box>
             ))

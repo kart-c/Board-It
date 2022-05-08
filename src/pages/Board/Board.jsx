@@ -14,26 +14,30 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { IoMdAdd } from "react-icons/io";
-import { useBoards } from "../../contexts";
-import { addNewListService } from "../../services";
+import { useBoards, useAuth } from "../../contexts";
+import { addNewListService, addUserAsVisitorService } from "../../services";
 import { List, Navbar, BoardNavbar } from "../../components";
 
 const Board = () => {
   const { boardId } = useParams();
   const { boards } = useBoards();
+  const { currentUser } = useAuth();
   const initialFocusRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [listInputTitle, setListInputTitle] = useState("");
-  const [board, setBoard] = useState({});
+  const [board, setBoard] = useState(null);
 
   useEffect(() => {
     const singleBoard = boards.find((board) => board.id === boardId);
     setBoard(singleBoard);
+    if (singleBoard && singleBoard.adminId !== currentUser.id) {
+      addUserAsVisitorService(singleBoard, currentUser);
+    }
   }, [boards]);
 
   return (
     <Box height="100vh" bg="gray.300" minW="max-content" marginTop="150px">
-      <BoardNavbar />
+      <BoardNavbar board={board} />
       <Navbar />
       <Box
         width="100vw"
