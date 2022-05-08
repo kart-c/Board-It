@@ -33,8 +33,8 @@ const Board = () => {
 
 	return (
 		<Box height="calc(100vh - 150px)" bg="gray.300" minW="max-content" marginTop="150px">
+			<Navbar board={board} />
 			<BoardNavbar />
-			<Navbar />
 			<Box
 				width="100vw"
 				padding="15px"

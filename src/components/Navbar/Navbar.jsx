@@ -1,9 +1,11 @@
-import { Avatar, Box, Button, Heading } from '@chakra-ui/react';
+import { Avatar, Box, Button, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useAuth } from '../../contexts/auth-context';
 
-const Navbar = ({ onOpen }) => {
+const Navbar = ({ onOpen, board }) => {
 	const { currentUser } = useAuth();
+
+	const boardTitle = board?.boardTitle?.slice(0, 1).toUpperCase() + board?.boardTitle?.slice(1);
 
 	return (
 		<Box
@@ -28,6 +30,10 @@ const Navbar = ({ onOpen }) => {
 				<Button onClick={onOpen} colorScheme="twitter">
 					Add new Board
 				</Button>
+			) : boardTitle ? (
+				<Text fontSize="lg" fontWeight="700" letterSpacing="1px">
+					{boardTitle}
+				</Text>
 			) : null}
 			<Avatar
 				name={currentUser.id ? currentUser.userName : ''}
