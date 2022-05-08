@@ -24,7 +24,7 @@ const Navbar = ({ onOpen, board }) => {
 			h="80px"
 			zIndex="5"
 		>
-			<Heading as="h1">
+			<Heading as="h1" fontFamily="Roboto">
 				<Link to="/home" size="lg">
 					BoardIt
 				</Link>
