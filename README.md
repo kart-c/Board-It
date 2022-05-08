@@ -4,6 +4,12 @@ BoardIt is a visual tool where you can manage and track all your tasks and proje
 
 ---
 
+<p align="center">
+  <img width="100%" src="./src/assets/boardIt.gif" alt="BoardIt"/>
+</p>
+
+---
+
 ## Contributing and How to Use
 
 1. Fork the Project
