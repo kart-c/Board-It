@@ -24,7 +24,7 @@ const MemberPopover = ({ board }) => {
 	return (
 		<>
 			<Portal>
-				<PopoverContent w="max-content">
+				<PopoverContent w="64" >
 					<PopoverArrow />
 					<PopoverHeader>Members in Current Boards</PopoverHeader>
 					<PopoverCloseButton />
