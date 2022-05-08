@@ -47,7 +47,7 @@ const User = () => {
 								<Heading as="h4" size="md">
 									{board.boardTitle}
 								</Heading>
-								<Box d="flex" alignItems="center" mt="auto">
+								<Box d="flex" alignItems="center" mt="auto" justifyContent="space-between">
 									<Text fontSize="sm" casing="capitalize" mr="6">
 										{board.adminName}
 									</Text>
