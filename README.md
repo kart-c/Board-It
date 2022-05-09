@@ -5,7 +5,7 @@ BoardIt is a visual tool where you can manage and track all your tasks and proje
 ---
 
 <p align="center">
-  <img width="100%" src="./src/assets/boardIt.gif" alt="BoardIt"/>
+  <img width="100%" src="./src/assets/boardIt-demo.gif" alt="BoardIt"/>
 </p>
 
 ---
